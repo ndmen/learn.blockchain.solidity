@@ -32,4 +32,47 @@ contract Todos {
 
     //Solidity automatically created a getter for 'todos' so
     //you don't actually need this function.
+    function get(uint _index) public view returns (string memory text, bool completed) {
+        Todo storage todo = todos[_index];
+        return (todo.text, todo.completed);
+    }
+
+    //update text
+    function updateText(uint _index, string calldata _text) public {
+        Todo storage todo = todos[_index];
+        todo.text = _text;
+    }
+
+    //update completed
+    function toggleCompleted(uint _index) public {
+        Todo storage todo = todos[_index];
+        todo.completed = !todo.completed;
+    }
 } 
+
+//Declaring and importing Struct
+
+//File that the struct is declared in
+
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+//This is saved 'StructDeclaration.sol'
+
+
+struct Todo {
+    string text;
+    bool completed;
+}
+
+//File that imports the struct above
+
+//SPDX-License-Indentifier: MIT
+pragma solidity ^0.8.13;
+
+import "./StructDeclaration.sol";
+
+contract Todos {
+    //An array of 'Todo' struct
+    Todo[] public todos;
+}
+
